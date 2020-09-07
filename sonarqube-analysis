@@ -5,13 +5,13 @@ node{
    stage('Compile-Package'){
       // Get maven home path
       def mvn =  tool name: 'maven', type: 'maven'   
-      sh "${mvn}/bin/mvn package"
+      sh "${mvn}/usr/bin/mvn package"
    }
    
    stage('SonarQube Analysis') {
         def mvn =  tool name: 'maven', type: 'maven'
         withSonarQubeEnv('sonar-6') { 
-          sh "${mvn}/bin/mvn sonar:sonar"
+          sh "${mvn}/usr/bin/mvn sonar:sonar"
         }
     }
 }

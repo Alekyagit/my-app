@@ -1,16 +1,16 @@
 node{
    stage('SCM Checkout'){
-     git 'https://github.com/Alekyagit/my-app.git'
+     git 'https://github.com/Alekyagit/my-app'
    }
-  stage('Compile-Package'){
-	   // get maven hone path
-	def mvnHome = tool name: 'maven', type: 'maven'
-	   sh "${mvnHome}/usr/bin/mvn package"
+   stage('Compile-Package'){
+      // get maven hone path
+      def mvnHome = tool name: 'maven', type: 'maven'
+      sh "${mvnHome}/usr/bin/mvn package"
    }
    
    stage('SonarQube Analysis') {
         def mvnHome = tool name: 'maven', type: 'maven'
-        withSonarQubeEnv('sonar') { 
+        withSonarQubeEnv('sonar1') { 
           sh "${mvnHome}/usr/bin/mvn sonar:sonar"
         }
     }

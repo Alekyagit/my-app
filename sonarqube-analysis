@@ -3,13 +3,14 @@ node{
      git 'https://github.com/Alekyagit/my-app'
    }
    stage('Compile-Package'){
-      // get maven hone path
+      // get maven home path from manage genkins->global tool configuration
       def mvnHome = tool name: 'maven-1', type: 'maven'
       sh "${mvnHome}/bin/mvn package"
    }
    
    stage('SonarQube Analysis') {
         def mvnHome = tool name: 'maven-1', type: 'maven'
+        // get sonar path from configuration system from manage jenkins
         withSonarQubeEnv('sonar-1') { 
           sh "${mvnHome}/bin/mvn sonar:sonar"
         }
